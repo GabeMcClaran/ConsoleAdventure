@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using ConsoleAdventure.Project.Controllers;
 using ConsoleAdventure.Project.Interfaces;
 using ConsoleAdventure.Project.Models;
 
@@ -16,11 +18,25 @@ namespace ConsoleAdventure.Project
         }
         public void Go(string direction)
         {
-            throw new System.NotImplementedException();
+            if (_game.CurrentRoom.Exits.ContainsKey(direction))
+            {
+                _game.CurrentRoom = _game.CurrentRoom.Exits[direction];
+                Console.Clear();
+                Messages.Add($"{_game.CurrentRoom.Description}");
+
+            }
+            else
+            {
+                System.Console.WriteLine("not a valid direction");
+            }
+
+
+
         }
         public void Help()
         {
-            throw new System.NotImplementedException();
+            Messages.Add("Type Restart to start over, Leave to exit game, look for description of room, inventory to view inventory.");
+
         }
 
         public void Inventory()
@@ -35,14 +51,16 @@ namespace ConsoleAdventure.Project
 
         public void Quit()
         {
-            throw new System.NotImplementedException();
+
         }
         ///<summary>
         ///Restarts the game 
         ///</summary>
         public void Reset()
         {
-            throw new System.NotImplementedException();
+            Console.Clear();
+            PrintMenu();
+
         }
 
         public void Setup(string playerName)

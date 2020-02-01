@@ -26,8 +26,7 @@ namespace ConsoleAdventure.Project.Controllers
                 Print();
                 GetUserInput();
             }
-            Console.Clear();
-            Console.WriteLine("Thanks for playing");
+
 
 
 
@@ -41,22 +40,31 @@ namespace ConsoleAdventure.Project.Controllers
             string input = Console.ReadLine().ToLower() + " ";
             string command = input.Substring(0, input.IndexOf(" "));
             string option = input.Substring(input.IndexOf(" ") + 1).Trim();
-            switch (input)
+            switch (command)
             {
-                case "Q":
+                case "Q"://NOTE ask why they dont work?
                 case "Quit":
                 case "Exit":
+                case "leave"://NOTE is only one that turns running off.
                     _running = false;
+                    break;
+                case "reset":
+                    _gameService.Reset();
+                    break;
+                case "help":
+                    System.Console.WriteLine("Your Current options are...");
+                    _gameService.Help();
+                    break;
+                case "go":
+                    Console.Clear();
+                    _gameService.Go(option);
                     break;
 
 
-                    // case "": 
-                    //     _gameService.Inventory();
-                    //     Print();
-                    //     Console.ReadLine();
-                    //     Console.Clear();
-                    // default:
-            }
+
+
+
+            };
             //NOTE this will take the user input and parse it into a command and option.
             //IE: take silver key => command = "take" option = "silver key"
 
@@ -71,6 +79,11 @@ namespace ConsoleAdventure.Project.Controllers
             }
             _gameService.Messages.Clear();
 
+        }
+
+        public void End()
+        {
+            _running = false;
         }
 
     }
