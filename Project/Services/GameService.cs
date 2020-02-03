@@ -74,17 +74,20 @@ namespace ConsoleAdventure.Project
         ///<summary>When taking an item be sure the item is in the current room before adding it to the player inventory, Also don't forget to remove the item from the room it was picked up in</summary>
         public void TakeItem(string itemName)
         {
+            Item takenItem = _game.CurrentRoom.Items.Find(i => i.Name == itemName);
 
             if (
+                // _game.CurrentRoom.Items[0].Name == takenItem.Name
                 _game.CurrentRoom.Items[0].Name == itemName
                 )
             {
+                // _game.CurrentPlayer.Inventory.Add(takenItem);
                 _game.CurrentPlayer.Inventory.Add(_game.CurrentRoom.Items[0]);
 
             }
 
-            // _game.CurrentPlayer.Inventory.Add(item => _game.CurrentRoom.Items.);
-            Messages.Add($"You found a {_game.CurrentRoom.Items[0].Name}");
+            Messages.Add($"You found a {takenItem.Name}");
+            _game.CurrentRoom.Items.Clear();
             // Player.Inventory.AddRange(_game.CurrentPlayer.Inventory);
 
         }

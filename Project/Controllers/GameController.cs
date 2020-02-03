@@ -62,6 +62,9 @@ namespace ConsoleAdventure.Project.Controllers
                 case "take":
                     _gameService.TakeItem(option);
                     break;
+                default:
+                    System.Console.WriteLine("Not a valid Option.");
+                    break;
 
 
 
