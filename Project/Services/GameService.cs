@@ -27,7 +27,7 @@ namespace ConsoleAdventure.Project
             }
             else
             {
-                System.Console.WriteLine("not a valid direction");
+                System.Console.WriteLine("not a valid command");
             }
 
 
@@ -74,14 +74,19 @@ namespace ConsoleAdventure.Project
         ///<summary>When taking an item be sure the item is in the current room before adding it to the player inventory, Also don't forget to remove the item from the room it was picked up in</summary>
         public void TakeItem(string itemName)
         {
-            if (_game.CurrentRoom.Items.Count == 0)
+
+            if (
+                _game.CurrentRoom.Items[0].Name == itemName
+                )
             {
-                Messages.Add(new string("No Items to use in this room."));
-                return;
+                _game.CurrentPlayer.Inventory.Add(_game.CurrentRoom.Items[0]);
+
             }
-            Messages.Add(new string($"There appears to be something of use in this room"));
+
+            // _game.CurrentPlayer.Inventory.Add(item => _game.CurrentRoom.Items.);
+            Messages.Add($"You found a {_game.CurrentRoom.Items[0].Name}");
             // Player.Inventory.AddRange(_game.CurrentPlayer.Inventory);
-            throw new System.NotImplementedException();
+
         }
         ///<summary>
         ///No need to Pass a room since Items can only be used in the CurrentRoom

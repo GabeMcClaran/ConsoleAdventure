@@ -59,6 +59,9 @@ namespace ConsoleAdventure.Project.Controllers
                     Console.Clear();
                     _gameService.Go(option);
                     break;
+                case "take":
+                    _gameService.TakeItem(option);
+                    break;
 
 
 

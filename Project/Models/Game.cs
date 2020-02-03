@@ -33,10 +33,12 @@ namespace ConsoleAdventure.Project.Models
             Porch.Exits.Add("north", Starting);
             Porch.Exits.Add("south", Escape);
 
+            Item lighter = new Item("lighter", "this is item to be used to light in area you cant see.");
+            Item Key = new Item("key", "Gives ability to unlock 1 door.");
             // Add Area that Items can be picked up
 
-            Kitchen.Items.Add(new Item("Candle", "Used to Light the Room to find the Keys."));
-            Bedroom.Items.Add(new Item("Ring of Two Keys", "Gives ability to unlock 1 door."));
+            Kitchen.Items.Add(lighter);
+            Bedroom.Items.Add(Key);
 
             CurrentRoom = Starting;
 
