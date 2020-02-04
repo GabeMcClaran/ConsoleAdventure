@@ -36,15 +36,15 @@ namespace ConsoleAdventure.Project.Controllers
         //NOTE Gets the user input, calls the appropriate command, and passes on the option if needed.
         public void GetUserInput()
         {
-            Console.WriteLine("What would you like to do?");
+            // Console.WriteLine("What would you like to do?");
             string input = Console.ReadLine().ToLower() + " ";
             string command = input.Substring(0, input.IndexOf(" "));
             string option = input.Substring(input.IndexOf(" ") + 1).Trim();
             switch (command)
             {
-                case "Q"://NOTE ask why they dont work?
-                case "Quit":
-                case "Exit":
+                case "q"://NOTE ask why they dont work?
+                case "quit":
+                case "exit":
                 case "leave"://NOTE is only one that turns running off.
                     _running = false;
                     break;
@@ -61,6 +61,15 @@ namespace ConsoleAdventure.Project.Controllers
                     break;
                 case "take":
                     _gameService.TakeItem(option);
+                    break;
+                case "look":
+                    _gameService.Look();
+                    break;
+                case "inventory":
+                    _gameService.Inventory();
+                    break;
+                case "use":
+                    _gameService.UseItem(option);
                     break;
                 default:
                     System.Console.WriteLine("Not a valid Option.");

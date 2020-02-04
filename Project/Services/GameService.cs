@@ -22,7 +22,10 @@ namespace ConsoleAdventure.Project
             {
                 _game.CurrentRoom = _game.CurrentRoom.Exits[direction];
                 Console.Clear();
+                Messages.Add($"You are in the {_game.CurrentRoom.Name}");
                 Messages.Add($"{_game.CurrentRoom.Description}");
+                foreach (var item in _game.CurrentRoom.Items)
+                    Messages.Add($"You notice a {item.Name} that might come in handy.");
 
             }
             else
@@ -41,16 +44,28 @@ namespace ConsoleAdventure.Project
 
         public void Inventory()
         {
-            throw new System.NotImplementedException();
+            if (_game.CurrentPlayer.Inventory == null)
+            {
+                Messages.Add("no items to use.");
+                return;
+            }
+            else
+
+                foreach (Item i in _game.CurrentPlayer.Inventory)
+                {
+                    Messages.Add($"You have a {i.Name}.");
+
+
+                }
+
+
+
         }
 
         public void Look()
         {
-            throw new System.NotImplementedException();
-        }
 
-        public void Quit()
-        {
+            Messages.Add(_game.CurrentRoom.Description);
 
         }
         ///<summary>
@@ -58,6 +73,7 @@ namespace ConsoleAdventure.Project
         ///</summary>
         public void Reset()
         {
+            //NOTE not required for pass so save this for later
             Console.Clear();
             PrintMenu();
 
@@ -67,41 +83,50 @@ namespace ConsoleAdventure.Project
 
         {
             string CurrentPlayer = playerName;
-
-
-
         }
         ///<summary>When taking an item be sure the item is in the current room before adding it to the player inventory, Also don't forget to remove the item from the room it was picked up in</summary>
         public void TakeItem(string itemName)
         {
+
             Item takenItem = _game.CurrentRoom.Items.Find(i => i.Name == itemName);
-
-            if (
-                // _game.CurrentRoom.Items[0].Name == takenItem.Name
-                _game.CurrentRoom.Items[0].Name == itemName
-                )
+            if (takenItem == null)
             {
-                // _game.CurrentPlayer.Inventory.Add(takenItem);
-                _game.CurrentPlayer.Inventory.Add(_game.CurrentRoom.Items[0]);
-
+                Messages.Add("no such item");
+                return;
             }
+            else
+            {
 
-            Messages.Add($"You found a {takenItem.Name}");
-            _game.CurrentRoom.Items.Clear();
-            // Player.Inventory.AddRange(_game.CurrentPlayer.Inventory);
+
+                _game.CurrentPlayer.Inventory.Add(takenItem);
+
+
+                Messages.Add($"You found a {itemName}, and notice a door to the south that is locked.");
+                _game.CurrentRoom.Items.Remove(takenItem);
+            }
 
         }
         ///<summary>
-        ///No need to Pass a room since Items can only be used in the CurrentRoom
-        ///Make sure you validate the item is in the room or player inventory before
-        ///being able to use the item
+
         ///</summary>
         public void UseItem(string itemName)
         {
+            Item usedItem = _game.CurrentPlayer.Inventory.Find(i => i.Name == itemName);
 
-            throw new System.NotImplementedException();
+            if (usedItem == null)
+            {
+                Messages.Add("you dont have anything to use.");
+                return;
+            }
+            else if (usedItem.Name == itemName)
+            {
+
+                Messages.Add($"You unlocked the door to the south and can escape.");
+
+            }
+
         }
-        //Below are methods added beyond given//
+
 
         public void PrintMenu()
         {

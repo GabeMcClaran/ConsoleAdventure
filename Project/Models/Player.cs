@@ -17,3 +17,4 @@ namespace ConsoleAdventure.Project.Models
         }
     }
 }
+
