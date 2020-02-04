@@ -36,7 +36,7 @@ namespace ConsoleAdventure.Project.Models
 
             Item Keys = new Item("key", "Gives ability to unlock 1 door.");
             // Add Area that Items can be picked up
-
+            Bedroom.usables.Add(Keys, "The Door to the south is now unlocked and looks like a viable way out.");
             // Kitchen.Items.Add(flashlight);
             Bedroom.Items.Add(Keys);
 

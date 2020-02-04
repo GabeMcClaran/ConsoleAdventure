@@ -118,11 +118,10 @@ namespace ConsoleAdventure.Project
                 Messages.Add("you dont have anything to use.");
                 return;
             }
-            else if (usedItem.Name == itemName)
+            else if (_game.CurrentRoom.usables.ContainsKey(usedItem))
             {
-
-                Messages.Add($"You unlocked the door to the south and can escape.");
-
+                _game.CurrentRoom.Description = _game.CurrentRoom.usables[usedItem];
+                Messages.Add(_game.CurrentRoom.Description);
             }
 
         }

@@ -10,7 +10,7 @@ namespace ConsoleAdventure.Project.Models
         public List<Item> Items { get; set; }
         public Dictionary<string, IRoom> Exits { get; set; }
         public bool Locked { get; set; }
-
+        public Dictionary<Item, string> usables { get; set; }
 
         public void AddExits(Room des)
         {
@@ -24,6 +24,8 @@ namespace ConsoleAdventure.Project.Models
             Description = description;
             Exits = new Dictionary<string, IRoom>();
             Items = new List<Item>();
+            usables = new Dictionary<Item, string>();
+
         }
     }
 

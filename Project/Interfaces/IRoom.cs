@@ -10,5 +10,7 @@ namespace ConsoleAdventure.Project.Interfaces
         string Description { get; set; }
         List<Item> Items { get; set; }
         Dictionary<string, IRoom> Exits { get; set; }
+        Dictionary<Item, string> usables { get; set; }
+
     }
 }
